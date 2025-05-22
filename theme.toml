@@ -1,0 +1,20 @@
+name = "Solarized"
+license = "MIT"
+licenselink = "https://mit-license.org/"
+description = "A simple theme based on the Solarized color palette by Ethan Schoonover."
+
+homepage = "https://github.com/komputerwiz/hugo-solarized"
+
+demosite = "https://w5bcs.radio/minutes/"
+
+tags = ["solarized", "light", "dark"]
+featutres = []
+
+[author]
+name = "Matthew Barry"
+homepage = "https://komputerwiz.net/"
+
+[original]
+name = "Ethan Schoonover"
+homepage = "https://ethanschoonover.com/solarized/`"
+repo = "https://github.com/altercation/solarized"

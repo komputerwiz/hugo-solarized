@@ -1,0 +1,31 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "bodyclass" }}search{{ end }}
+
+{{ define "stylesheets" }}
+<link href="{{ relURL "pagefind/pagefind-ui.css" }}" rel="stylesheet">
+{{ end }}
+
+{{ define "javascripts" }}
+	<script src="{{ relURL "pagefind/pagefind-ui.js" }}"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', (event) => {
+			new PagefindUI({
+				element: '#search',
+				showImages: false,
+				showSubResults: true,
+				autofocus: true,
+				// sort: { date: 'desc' },
+				pageSize: 10,
+			});
+		});
+	</script>
+{{ end }}
+
+{{ define "body" }}
+	{{ partial "header.html" . }}
+	<article class="container py-3">
+		{{ .Content }}
+		<div id="search"></div>
+	</article>
+{{ end }}

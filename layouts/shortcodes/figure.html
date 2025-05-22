@@ -1,0 +1,50 @@
+{{ $src := .Get "src" }}
+{{ $width := .Get "width" }}
+{{ $height := .Get "height" }}
+{{ $class := .Get "class" }}
+
+{{ $img := .Page.Resources.GetMatch $src }}
+{{ if not $img }}
+	{{ errorf "Image %q not found in page resources." $src }}
+{{ end }}
+
+{{ $resized := $img }}
+{{ if and $width $height }}
+	{{ $resized = $img.Fit (printf "%sx%s" $width $height) }}
+{{ else if $width }}
+	{{ $resized = $img.Resize (printf "%sx" $width) }}
+{{ else if $height }}
+	{{ $resized = $img.Resize (printf "x%s" $height) }}
+{{ end }}
+
+<figure class="figure {{ $class }}">
+	{{ $finalLink := .Get "link" }}
+	{{ if not $finalLink }}
+		{{ $finalLink = $img.RelPermalink }}
+	{{ end }}
+
+	<a href="{{ $finalLink }}"
+		{{ with .Get "target" }} target="{{ . }}"{{ end }}
+		{{ with .Get "rel" }} rel="{{ . }}"{{ end }}
+	>
+		<img src="{{ $resized.RelPermalink }}" class="figure-img img-fluid rounded"
+			alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "title" }}{{ end }}"
+		>
+	</a>
+
+	{{ if or (.Get "attr") (.Get "caption") (.Get "title") }}
+		<figcaption class="figure-caption">
+			{{ with .Get "title" }}<h4>{{ . }}</h4>{{ end }}
+			{{ with .Get "caption" }}<p>{{ . }}</p>{{ end }}
+			{{ with .Get "attr" }}
+				<cite>
+					{{ with $.Get "attrlink" }}
+						<a href="{{ . }}" target="_blank">{{ $.Get "attr" }}</a>
+					{{ else }}
+						{{ $.Get "attr" }}
+					{{ end }}
+				</cite>
+			{{ end }}
+		</figcaption>
+	{{ end }}
+</figure>

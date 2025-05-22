@@ -1,0 +1,8 @@
+[module]
+
+[module.hugoVersion]
+extended = true
+
+# This is the version of Hugo that I used when first writing this theme at the start ef 2025.
+# It probably works on older versions, too, but I haven't bothered to test them.
+min = "0.140.2"

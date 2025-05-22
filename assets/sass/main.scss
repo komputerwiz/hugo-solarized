@@ -1,0 +1,393 @@
+$line-height: 1.4em;
+$font-monospace: 'Iosevka', 'Fira Code', 'Ubuntu Mono', 'Source Code Pro', Inconsolata, Consolas, Menlo, 'Courier New', monospace;
+
+$base03: #002b36;
+$base02: #073642;
+$base01: #586e75;
+$base00: #657b83;
+$base0: #839496;
+$base1: #93a1a1;
+$base2: #eee8d5;
+$base3: #fdf6e3;
+
+$yellow: #b58900;
+$orange: #cb4b16;
+$red: #dc322f;
+$magenta: #d33682;
+$violet: #6c71c4;
+$blue: #268bd2;
+$cyan: #2aa198;
+$green: #859900;
+
+@mixin solarized-rebase($bg, $bg-hl, $fg-muted, $r00, $fg, $fg-hl, $r2, $r3) {
+	body {
+		background: $bg;
+		color: $fg;
+	}
+
+	.toc {
+		border-color: $bg-hl;
+
+		a {
+			color: $fg-muted;
+		}
+
+		a:hover {
+			color: $fg-hl;
+		}
+	}
+
+	article {
+		h1, h2, h3, h4, h5, h6,
+		strong {
+			color: $fg-hl;
+		}
+
+		h1 {
+			border-bottom-color: $bg-hl;
+		}
+
+		ins, del, mark, .mark {
+			background: $bg-hl !important;
+		}
+
+		.highlight {
+			border-color: $fg-muted;
+		}
+
+		blockquote {
+			color: $fg-hl;
+			@media screen {
+				border-left-color: $bg-hl;
+			}
+		}
+
+		hr {
+			border-top-color: $bg-hl;
+		}
+
+		.callsign {
+			// color: $fg-hl;
+		}
+	}
+
+	footer {
+		border-top-color: $bg-hl;
+		color: $fg-muted;
+	}
+
+	.motion {
+		background-color: $bg-hl;
+		border-color: $fg-muted;
+	}
+
+	.table {
+		--bs-table-bg: #{$bg};
+		--bs-table-color: #{$fg};
+		--bs-table-border-color: #{$fg-muted};
+		--bs-table-hover-bg: #{$bg-hl};
+		--bs-table-hover-color: #{$fg-hl};
+		--bs-table-striped-bg: #{$bg-hl};
+		--bs-table-striped-color: #{$fg-hl};
+	}
+
+	.events {
+		.event {
+			border-color: $fg-muted;
+
+			.title {
+				background-color: $bg-hl;
+				border-color: $fg-muted;
+			}
+		}
+	}
+
+	.search {
+		#search {
+			--pagefind-ui-text: #{$fg};
+			--pagefind-ui-background: #{$bg};
+			--pagefind-ui-border: #{$fg-muted};
+			--pagefind-ui-tag: #{$fg-muted};
+		}
+	}
+}
+
+@mixin solarized-light {
+	@include solarized-rebase($base3, $base2, $base1, $base0, $base00, $base01, $base02, $base03);
+}
+
+@mixin solarized-dark {
+	@include solarized-rebase($base03, $base02, $base01, $base00, $base0, $base1, $base2, $base3);
+}
+
+// fix for Bootstrap container width when printing
+@media print {
+	.container {
+		max-width: none;
+	}
+}
+
+html {
+	@include solarized-light;
+
+	--article-font: #{$font-monospace};
+
+	&[data-bs-theme=dark] {
+		@include solarized-dark;
+	}
+}
+
+header {
+	@media print {
+		display: none;
+	}
+}
+
+.toc {
+	@media (min-width: 992px) {
+		position: sticky;
+		top: 2rem;
+		z-index: 2;
+		height: calc(100vh - 4rem);
+		overflow-y: auto;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	ol, ul {
+		list-style: none;
+		padding-left: 0;
+
+		li {
+			margin: 0.5rem 0;
+		}
+
+		ol, ul {
+			padding-left: 2rem;
+		}
+	}
+}
+
+article {
+	font-family: var(--article-font);
+	line-height: $line-height;
+	position: relative;
+
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: bold;
+	}
+
+	h1 {
+		margin: 3rem 0 1rem;
+		border-bottom: 2px solid;
+	}
+
+	a {
+		color: $blue;
+	}
+
+	ins {
+		color: $green;
+		text-decoration: underline;
+	}
+
+	del {
+		color: $red;
+		text-decoration: line-through;
+	}
+
+	ins, del {
+		@media screen {
+			&:before, &:after {
+				position: absolute;
+				left: 0;
+				top: auto;
+				height: $line-height;
+				border-left: 3px solid $blue;
+				content: '';
+			}
+		}
+	}
+
+	mark, .mark {
+		color: $yellow !important
+	}
+
+	code {
+		color: $green;
+		font-family: $font-monospace;
+	}
+
+	.highlight {
+		border-width: 1px;
+		border-style: solid;
+		border-radius: 4px;
+		margin: 0.75rem 0;
+		padding: 4px;
+
+		pre {
+			margin-bottom: 0;
+		}
+	}
+
+	table {
+		margin: 1em 0;
+
+		th, td {
+			padding: 0 0.5em;
+		}
+	}
+
+	blockquote {
+		padding-left: 1rem;
+		padding-right: 1rem;
+		@media screen {
+			border-left-style: solid;
+			border-left-width: 3px;
+		}
+
+		@media print {
+			padding: 1rem;
+		}
+	}
+
+	hr {
+		border-top-width: 2px;
+		opacity: 1;
+	}
+
+	.callsign {
+		font-family: $font-monospace;
+	}
+}
+
+footer {
+	margin: 1rem 0;
+	padding: 1rem 0;
+	border-top-width: 1px;
+	border-top-style: solid;
+	font-size: 0.8em;
+	text-align: center;
+
+	@media print {
+		display: none;
+	}
+
+	nav a {
+		text-transform: uppercase;
+	}
+}
+
+.motion {
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 4px;
+	padding: 1rem;
+	margin: 1rem;
+
+	.mover, .seconder {
+		color: $green;
+	}
+
+	.second {
+		font-style: italic;
+		margin-top: 0.5rem
+	}
+
+	.motion-text {
+		font-style: italic;
+	}
+
+	section {
+		margin: 1rem 0;
+		&:first-child { margin-top: 0; }
+		&:last-child { margin-bottom: 0; }
+
+		&.inline {
+			.title, .content {
+				display: inline;
+				padding: 0;
+			}
+		}
+
+		.title {
+			font-weight: bold;
+		}
+		.content {
+			padding: 0 1rem;
+		}
+	}
+
+	.first .content,
+	.outcome .content {
+		font-style: italic;
+	}
+}
+
+.events {
+	.event {
+		border-width: 1px;
+		border-style: solid;
+		border-radius: 8px;
+		margin: 1rem 0;
+
+		.title {
+			display: block;
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+			color: inherit;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 1.3em;
+			padding: 0.5rem;
+		}
+
+		.summary {
+			padding: 0.5rem;
+		}
+	}
+}
+
+.search {
+	#search {
+		--pagefind-ui-scale: 1;
+		--pagefind-ui-primary: #{$blue};
+		--pagefind-ui-border-width: 2px;
+		--pagefind-ui-border-radius: 8px;
+		--pagefind-ui-image-border-radius: 8px;
+		--pagefind-ui-image-box-ratio: 3 / 2;
+		--pagefind-ui-font: #{$font-monospace};
+	}
+}
+
+.youtube {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+
+	@media print {
+		display: none;
+	}
+
+	> iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	&-alt-print {
+		display: none;
+
+		@media print {
+			display: block;
+		}
+	}
+}

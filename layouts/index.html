@@ -1,0 +1,6 @@
+{{ define "body" }}
+	{{ partial "header.html" . }}
+	<article class="container py-3" data-pagefind-body>
+		{{ .Content }}
+	</article>
+{{ end }}

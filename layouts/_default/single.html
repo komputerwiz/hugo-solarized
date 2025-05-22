@@ -1,0 +1,25 @@
+{{ define "title" }}{{ .Title }} &mdash; {{ .Site.Title }}{{ end }}
+
+{{ define "body" }}
+	{{ partial "header.html" . }}
+	<div class="container py-3">
+		<div class="row">
+			{{ if .Param "toc" }}
+				<div class="col-lg-3 order-lg-2">
+					{{ partial "toc.html" . }}
+				</div>
+			{{ end }}
+			<div class="col order-lg-1">
+				<article data-pagefind-body>
+					<h1>{{ .Title }}</h1>
+					<section>
+						{{ .Content }}
+					</section>
+				</article>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<p><em>Last Updated: {{ .Lastmod.Format "2006-01-02" }}</em></p>
+	</footer>
+{{ end }}

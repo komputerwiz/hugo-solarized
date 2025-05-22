@@ -1,0 +1,154 @@
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarContent">
+				<!-- main navigation -->
+				<ul class="navbar-nav me-auto">
+					{{- $currentPage := . -}}
+					{{- range .Site.Menus.main -}}
+						{{- if .HasChildren -}}
+							<li class="nav-item dropdown{{ if $currentPage.HasMenuCurrent "main" . }} active{{ end }}">
+								<a class="nav-link dropdown-toggle" href="#" id="{{ .Identifier }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{- .Pre -}}
+									<span>
+										{{- .Name -}}
+										{{- if $currentPage.IsMenuCurrent "main" . -}}
+											<span class="visually-hidden">(current)</span>
+										{{- end -}}
+									</span>
+									{{- .Post -}}
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="{{ .Identifier }}">
+									{{- range .Children -}}
+										<li>
+											<a class="dropdown-item{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL }}">
+												{{- .Pre -}}
+												<span>
+													{{- .Name -}}
+													{{- if $currentPage.IsMenuCurrent "main" . -}}
+														<span class="visually-hidden">(current)</span>
+													{{- end -}}
+												</span>
+												{{- .Post -}}
+											</a>
+										</li>
+									{{ end }}
+								</ul>
+							</li>
+						{{- else -}}
+							<li class="nav-item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+								<a class="nav-link" href="{{ .URL }}">
+									{{- .Pre -}}
+									<span>
+										{{- .Name -}}
+										{{- if $currentPage.IsMenuCurrent "main" . -}}
+											<span class="visually-hidden">(current)</span>
+										{{- end -}}
+									</span>
+									{{- .Post -}}
+								</a>
+							</li>
+						{{- end -}}
+					{{- end -}}
+				</ul>
+
+				<!-- right navigation -->
+				<ul class="navbar-nav">
+					{{- range .Site.Menus.right -}}
+						{{- if .HasChildren -}}
+							<li class="nav-item dropdown{{ if $currentPage.HasMenuCurrent "right" . }} active{{ end }}">
+								<a class="nav-link dropdown-toggle" href="#" id="{{ .Identifier }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{- .Pre -}}
+									<span>
+										{{- .Name -}}
+										{{- if $currentPage.IsMenuCurrent "right" . -}}
+											<span class="visually-hidden">(current)</span>
+										{{- end -}}
+									</span>
+									{{- .Post -}}
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="{{ .Identifier }}">
+									{{- range .Children -}}
+										<li>
+											<a class="dropdown-item{{ if $currentPage.IsMenuCurrent "right" . }} active{{ end }}" href="{{ .URL }}">
+												{{- .Pre -}}
+												<span>
+													{{- .Name -}}
+													{{- if $currentPage.IsMenuCurrent "right" . -}}
+														<span class="visually-hidden">(current)</span>
+													{{- end -}}
+												</span>
+												{{- .Post -}}
+											</a>
+										</li>
+									{{ end }}
+								</ul>
+							</li>
+						{{- else -}}
+							<li class="nav-item {{ if $currentPage.IsMenuCurrent "right" . }}active{{ end }}">
+								<a class="nav-link" href="{{ .URL }}">
+									{{- .Pre -}}
+									<span>
+										{{- .Name -}}
+										{{- if $currentPage.IsMenuCurrent "right" . -}}
+											<span class="visually-hidden">(current)</span>
+										{{- end -}}
+									</span>
+									{{- .Post -}}
+								</a>
+							</li>
+						{{- end -}}
+					{{- end -}}
+
+					<!-- font picker -->
+					<li class="nav-item dropdown">
+						<button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-font" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Select Font (Iosevka)">
+							<i class="bi-fonts"></i>
+							<span class="d-lg-none ms-2" id="bd-font-text">Select font</span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-font-text">
+							<li><button class="dropdown-item d-flex align-items-center active" style="font-family: Iosevka;" type="button" data-font-value="Iosevka" aria-pressed="true">Iosevka</button></li>
+							<li><button class="dropdown-item d-flex align-items-center" style="font-family: 'Fira Code';" type="button" data-font-value="Fira Code" aria-pressed="false">Fira Code</button></li>
+							<li><button class="dropdown-item d-flex align-items-center" style="font-family: 'Ubuntu Mono';" type="button" data-font-value="Ubuntu Mono" aria-pressed="false">Ubuntu Mono</button></li>
+						</ul>
+					</li>
+
+					<!-- light/dark theme picker-->
+					<li class="nav-item dropdown">
+						<button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+							<i id="theme-icon-active" class="bi-circle-half"></i>
+							<span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+							<li>
+								<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" data-bs-theme-icon="bi-sun-fill" aria-pressed="false">
+									<i class="theme-icon opacity-50 me-2 bi-sun-fill"></i>
+									Light
+									<i class="ms-auto d-none bi-check2"></i>
+								</button>
+							</li>
+							<li>
+								<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" data-bs-theme-icon="bi-moon-stars-fill" aria-pressed="false">
+									<i class="theme-icon opacity-50 me-2 bi-moon-stars-fill"></i>
+									Dark
+									<i class="ms-auto d-none bi-check2"></i>
+								</button>
+							</li>
+							<li>
+								<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" data-bs-theme-icon="bi-circle-half" aria-pressed="true">
+									<i  class="theme-icon opacity-50 me-2 bi-circle-half"></i>
+									Auto
+									<i class="ms-auto d-none bi-check2"></i>
+								</button>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
