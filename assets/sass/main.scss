@@ -1,5 +1,4 @@
 $line-height: 1.4em;
-$font-monospace: 'Iosevka', 'Fira Code', 'Ubuntu Mono', 'Source Code Pro', Inconsolata, Consolas, Menlo, 'Courier New', monospace;
 
 $base03: #002b36;
 $base02: #073642;
@@ -130,7 +129,7 @@ $green: #859900;
 html {
 	@include solarized-light;
 
-	--article-font: #{$font-monospace};
+	--article-font: monospace;
 
 	&[data-bs-theme=dark] {
 		@include solarized-dark;
@@ -217,7 +216,6 @@ article {
 
 	code {
 		color: $green;
-		font-family: $font-monospace;
 	}
 
 	.highlight {
@@ -256,10 +254,6 @@ article {
 	hr {
 		border-top-width: 2px;
 		opacity: 1;
-	}
-
-	.callsign {
-		font-family: $font-monospace;
 	}
 }
 
@@ -360,7 +354,7 @@ footer {
 		--pagefind-ui-border-radius: 8px;
 		--pagefind-ui-image-border-radius: 8px;
 		--pagefind-ui-image-box-ratio: 3 / 2;
-		--pagefind-ui-font: #{$font-monospace};
+		--pagefind-ui-font: var(--article-font);
 	}
 }
 
