@@ -10,7 +10,7 @@
 	<script src="{{ relURL "pagefind/pagefind-ui.js" }}"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', (event) => {
-			new PagefindUI({
+			const search = new PagefindUI({
 				element: '#search',
 				showImages: false,
 				showSubResults: true,
@@ -18,6 +18,12 @@
 				// sort: { date: 'desc' },
 				pageSize: 10,
 			});
+
+			const params = new URLSearchParams(window.location.search);
+			const query = params.get('q');
+			if (query) {
+				search.triggerSearch(query);
+			}
 		});
 	</script>
 {{ end }}
