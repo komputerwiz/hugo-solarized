@@ -20,8 +20,10 @@ $green: #859900;
 
 @mixin solarized-rebase($bg, $bg-hl, $fg-muted, $r00, $fg, $fg-hl, $r2, $r3) {
 	body {
-		background: $bg;
-		color: $fg;
+		@media screen {
+			background: $bg;
+			color: $fg;
+		}
 	}
 
 	.toc {
@@ -40,10 +42,18 @@ $green: #859900;
 		h1, h2, h3, h4, h5, h6,
 		strong {
 			color: $fg-hl;
+
+			@media print {
+				color: inherit;
+			}
 		}
 
 		h1 {
 			border-bottom-color: $bg-hl;
+
+			&:first-child {
+				margin-top: 0;
+			}
 		}
 
 		ins, del, mark, .mark {
