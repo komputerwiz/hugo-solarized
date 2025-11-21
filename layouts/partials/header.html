@@ -104,6 +104,15 @@
 						{{- end -}}
 					{{- end -}}
 
+					{{- with .Param "searchPage" -}}
+						<form class="input-group" action="{{ ($.Site.GetPage .).Permalink }}">
+							<input type="search" class="form-control" name="q" placeholder="Search" aria-label="Enter search terms" />
+							<button class="btn btn-outline-secondary" type="submit" aria-label="Search">
+								<i class="bi-search"></i>
+							</button>
+						</form>
+					{{- end -}}
+
 					<!-- font picker -->
 					<li class="nav-item dropdown">
 						<button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-font" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Select Font (Iosevka)">
